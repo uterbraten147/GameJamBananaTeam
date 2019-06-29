@@ -5,12 +5,13 @@ using UnityEngine;
 public class Enemigos : MonoBehaviour {
 
     Vector3 posiIni, direccion;
+    public Transform rayorigin;
     Rigidbody mirig;
 
     public float speed=5.0f;
     public Transform[] ruta;
     int current=0, sizeruta=0;
-    bool alerta=false;
+    bool alerta=false,checar = true;
 
 	void Start ()
     {
@@ -21,7 +22,7 @@ public class Enemigos : MonoBehaviour {
         //Hago que sea valor 1
         direccion.Normalize();
         sizeruta=ruta.Length;
-        print("tamaño ruta es" + sizeruta);
+        print("tamaño ruta es " + sizeruta);
 	}
 	
 	void Update ()
@@ -36,11 +37,16 @@ public class Enemigos : MonoBehaviour {
             }
            
         }
+
+        if (checar)
+        {
+            checar = false;
+            StartCoroutine(Checar(0.5f));
+        }
         
         Quaternion q = Quaternion.LookRotation(direccion);
         transform.rotation = Quaternion.Lerp(transform.rotation, q, 3f * Time.deltaTime);
 
-        
     }
 
     private void FixedUpdate()
@@ -53,7 +59,26 @@ public class Enemigos : MonoBehaviour {
         float dist=0.0f;
         dist = ((A.x - B.x)*(A.x - B.x))+ ((A.z - B.z) * (A.z - B.z));
         dist = Mathf.Sqrt(dist);
-        print(dist);
         return dist;
+    }
+
+    public  IEnumerator Checar(float t_)
+    {
+        yield return new WaitForSeconds(t_);
+        RaycastHit hit;
+        if(Physics.Raycast(rayorigin.position, transform.forward, out hit, 3f))
+        {
+            print(hit.collider.name);
+        }
+        /*if (Physics.Raycast(rayorigin.position, transform.forward, out hit, 3f))
+        {
+            print(hit.collider.name);
+        }
+        if (Physics.Raycast(rayorigin.position, transform.forward, out hit, 3f))
+        {
+            print(hit.collider.name);
+        }*/
+        Debug.DrawRay(rayorigin.position, transform.forward *3.0f ,Color.red,1f);
+        checar = true;
     }
 }
