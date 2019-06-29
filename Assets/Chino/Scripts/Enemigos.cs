@@ -5,13 +5,13 @@ using UnityEngine;
 public class Enemigos : MonoBehaviour {
 
     Vector3 posiIni, direccion;
-    public Transform rayorigin;
+    public Transform rayorigin, player;
     Rigidbody mirig;
 
-    public float speed=5.0f;
+    public float speed=5.0f, distanciavista=14.0f;
     public Transform[] ruta;
     int current=0, sizeruta=0;
-    bool alerta=false,checar = true;
+    bool alerta=false,checar = true, dircheck=true, esperar=false;
 
 	void Start ()
     {
@@ -22,7 +22,7 @@ public class Enemigos : MonoBehaviour {
         //Hago que sea valor 1
         direccion.Normalize();
         sizeruta=ruta.Length;
-        print("tamaño ruta es " + sizeruta);
+        //print("tamaño ruta es " + sizeruta);
 	}
 	
 	void Update ()
@@ -35,23 +35,42 @@ public class Enemigos : MonoBehaviour {
                 direccion = ruta[current].position - transform.position;
                 direccion.Normalize();
             }
-           
+
+            if (checar)
+            {
+                checar = false;
+                StartCoroutine(ChecarPlayer(0.4f));
+            }
+
+            if (dircheck)
+            {
+                dircheck = false;
+                StartCoroutine(Rechecardireccion());
+
+            }
+        }
+        else
+        {
+            Persecucion();
         }
 
-        if (checar)
+        if (!esperar)
         {
-            checar = false;
-            StartCoroutine(Checar(0.5f));
+            Quaternion q = Quaternion.LookRotation(direccion);
+            Quaternion p = Quaternion.Lerp(transform.rotation, q, 3f * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, p.eulerAngles.y, 0);
         }
         
-        Quaternion q = Quaternion.LookRotation(direccion);
-        transform.rotation = Quaternion.Lerp(transform.rotation, q, 3f * Time.deltaTime);
 
     }
 
     private void FixedUpdate()
     {
-        mirig.MovePosition(transform.position + direccion * Time.deltaTime * speed);     
+        if (!esperar)
+        {
+            mirig.MovePosition(transform.position + direccion * Time.deltaTime * speed);
+        }
+        
     }
 
     public float Distancia(Vector3 A, Vector3 B)
@@ -62,23 +81,66 @@ public class Enemigos : MonoBehaviour {
         return dist;
     }
 
-    public  IEnumerator Checar(float t_)
+    public  IEnumerator ChecarPlayer(float t_)
     {
         yield return new WaitForSeconds(t_);
-        RaycastHit hit;
-        if(Physics.Raycast(rayorigin.position, transform.forward, out hit, 3f))
-        {
-            print(hit.collider.name);
+       
+        if (Distancia(transform.position, player.position) < distanciavista){
+
+            Vector3 directionplayer = (player.position - transform.position).normalized;
+            float anguloentreestos = Vector3.Angle(transform.forward, directionplayer);
+            if(anguloentreestos < 50f)
+            {
+                
+                RaycastHit hit;
+                if (Physics.Raycast(rayorigin.position,directionplayer, out hit, distanciavista))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        Debug.DrawLine(rayorigin.position, player.position, Color.red, 1f);
+                        print("te vi putito");
+                        alerta = true;
+                    }
+                }
+            }
         }
-        /*if (Physics.Raycast(rayorigin.position, transform.forward, out hit, 3f))
-        {
-            print(hit.collider.name);
-        }
-        if (Physics.Raycast(rayorigin.position, transform.forward, out hit, 3f))
-        {
-            print(hit.collider.name);
-        }*/
-        Debug.DrawRay(rayorigin.position, transform.forward *3.0f ,Color.red,1f);
         checar = true;
+    }
+
+    public IEnumerator Rechecardireccion()
+    {
+        yield return new WaitForSeconds(1f);
+        direccion = ruta[current].position - transform.position;
+        direccion.Normalize();
+        dircheck = true;
+    }
+
+    public void Persecucion()
+    {
+        direccion = player.position - transform.position;
+        direccion.Normalize();
+
+        if(Distancia(transform.position, player.position)>distanciavista)
+        {
+            esperar = true;
+            StartCoroutine(Esperar());
+        }
+    }
+
+    public IEnumerator Esperar()
+    {
+        yield return new WaitForSeconds(1f);
+        alerta = false;
+        StartCoroutine(ChecarPlayer(0.0f));
+        yield return new WaitForSeconds(0.1f);
+        if (!alerta)
+        {
+            current = 0;
+            direccion = ruta[0].position - transform.position;
+            direccion.Normalize();
+            esperar = false;
+        }
+        else { esperar = false; alerta = true; Persecucion(); }
+        
     }
 }
