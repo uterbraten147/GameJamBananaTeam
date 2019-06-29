@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public static int score = 0;
-    public Canvas canvas1;
 
     private int time=0;
     [SerializeField] private Text temporizador;
@@ -40,7 +39,7 @@ public class GameController : MonoBehaviour {
         return score;
     }
 
-    public int getTime()
+    public float getTime()
     {
         return time;
     }
