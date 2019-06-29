@@ -8,17 +8,13 @@ public class CharacterMov : MonoBehaviour {
 
     public float InputX;
     public float InputZ;
-    public Vector3 desiredMoveDirection;
-    public bool blockRotationPlayer;
-    public float desiredRotationSpeed;
     public Animator anim;
     public float Speed;
-    public float allowPlayerRotation;
-    public Camera cam;
-    public CharacterController controller;
-    public bool isGrounded;
-    private float VerticalVel;
+    public int velPlayer;
+
+    public float smoothRotation;
     private Vector3 moveVector;
+    public Rigidbody rb;
 
 
 
@@ -26,50 +22,20 @@ public class CharacterMov : MonoBehaviour {
 	void Start () {
 
         anim = this.GetComponent<Animator>();
-        cam = Camera.main;
-        controller = this.GetComponent<CharacterController>();
-		
-	}
+        rb = GetComponent<Rigidbody>();
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         InputMagnitud();
 
+
        
-
-        isGrounded = controller.isGrounded;
-
-        if (isGrounded)
-        {
-            VerticalVel -= 0;
-        }
-        else
-        {
-            VerticalVel -= 2;
-        }
-        moveVector = new Vector3(0, VerticalVel,0);
-        controller.Move(moveVector);
-	}
-
-    void PlayerMoveAnrotation()
-    {
-        InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Vertical");
-
-        var camara = Camera.main;
-        var forward = cam.transform.forward;
-        var rigth = cam.transform.right;
-
-        forward.y = 0.0f;
-        rigth.Normalize();
-
-        desiredMoveDirection = forward * InputZ + rigth * InputX;
-        if (blockRotationPlayer == false)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-        }
     }
 
+    
     void InputMagnitud()
     {
         InputX = Input.GetAxis("Horizontal");
@@ -79,17 +45,25 @@ public class CharacterMov : MonoBehaviour {
         anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2.0f);
 
 
+        rb.MovePosition(transform.position + transform.forward * Time.deltaTime* InputZ* velPlayer);
+
+        if (InputX != 0)
+        {
+            transform.Rotate(Vector3.up, InputX * smoothRotation);
+           
+
+
+        }
+        else
+        {
+           
+        }
+
+
         Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
-        if(Speed > allowPlayerRotation)
-        {
-            anim.SetFloat("InputMagnitud", Speed, 0.0f, Time.deltaTime);
-            PlayerMoveAnrotation();
-        }
-        else if(Speed < allowPlayerRotation){
-            anim.SetFloat("InputMagnitud", Speed, 0.0f, Time.deltaTime);
+        anim.SetFloat("InputMagnitud", Speed, 0.0f, Time.deltaTime);
 
-        }
 
 
     }
