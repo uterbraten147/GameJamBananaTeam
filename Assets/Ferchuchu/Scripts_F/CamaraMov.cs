@@ -57,8 +57,6 @@ public class CamaraMov : MonoBehaviour {
     private void LateUpdate()
     {
         CamaraUpdater();
-
-
     }
 
     void CamaraUpdater()
