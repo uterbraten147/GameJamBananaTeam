@@ -1,16 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
+    public GameObject MainPanel;
+    public GameObject CreditosPanel;
+
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Awake () {
+
+        MainPanel.SetActive(true);
+        CreditosPanel.SetActive(false);
+
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void startGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Creditos()
+    {
+        MainPanel.SetActive(false);
+        CreditosPanel.SetActive(true);
+    }
+
+    public void returnMenu()
+    {
+        MainPanel.SetActive(true);
+        CreditosPanel.SetActive(false);
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
 }
