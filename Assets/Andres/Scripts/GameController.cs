@@ -99,11 +99,12 @@ public class GameController : MonoBehaviour {
        
     }
 
-    void FeatherSpawner()
+    public void FeatherSpawner()
     {
         GameObject aux;
         aux = Instantiate(FeatherPrefab,new Vector3(SpawnerPoint.transform.position.x, SpawnerPoint.transform.position.y, SpawnerPoint.transform.position.z), Quaternion.identity);
         aux.transform.rotation = Quaternion.Euler(Random.Range(170,280), 0, Random.Range(0, 10));
+        aux.transform.parent = SpawnerPoint.transform;
     }
 
 
