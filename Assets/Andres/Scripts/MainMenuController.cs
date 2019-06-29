@@ -19,7 +19,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void startGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void Creditos()
