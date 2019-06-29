@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterMov : MonoBehaviour {
 
+    int cont = 0;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +16,9 @@ public class CharacterMov : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public int GetPuntuacion()
+    {
+        return cont;
+    }
 }
