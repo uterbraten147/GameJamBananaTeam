@@ -21,7 +21,7 @@ public class Gallinero : MonoBehaviour {
         int QueGallinero;
         //QueGallinero = Random.Range(0, objGallinero.Length);
         GameObject aux;
-        aux = Instantiate(EggPrefab, new Vector3(transform.position.x, transform.position.y+1, transform.position.z), Quaternion.identity);
+        aux = Instantiate(EggPrefab, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.identity);
         aux.transform.parent = gameObject.transform;
         TengoHuevo = true;
 
