@@ -15,6 +15,7 @@ public class CharacterMov : MonoBehaviour {
     public float smoothRotation;
     private Vector3 moveVector;
     public Rigidbody rb;
+    public int limites;
 
 
 
@@ -38,14 +39,16 @@ public class CharacterMov : MonoBehaviour {
     
     void InputMagnitud()
     {
-        InputX = Input.GetAxis("Horizontal");
+        InputX = Mathf.Clamp(10, 0, Input.GetAxis("Horizontal"));
         InputZ = Input.GetAxis("Vertical");
+        InputZ = Mathf.Clamp(InputZ, 0f, 1f);
+        
 
         anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2.0f);
         anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2.0f);
 
 
-        rb.MovePosition(transform.position + transform.forward * Time.deltaTime* InputZ* velPlayer);
+         rb.MovePosition(transform.position + transform.forward * Time.deltaTime* InputZ* velPlayer);
 
         if (InputX != 0)
         {
