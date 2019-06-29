@@ -30,6 +30,7 @@ public class Huevo : MonoBehaviour {
         if(other.tag == "Player")
         {
             scpController.SetScore(score);
+            scpController.FeatherSpawner();
             scpController.EnDondePonerHuevo(getId());
             Destroy(gameObject);
         }
