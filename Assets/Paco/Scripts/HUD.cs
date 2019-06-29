@@ -11,16 +11,16 @@ public class HUD : MonoBehaviour {
     Text txtScore, txtStart;
     bool isStart = false;
     public float cont;
-    /* CharacterMov scpCharacter;
-     GameManager scpManager;*/
+    CharacterMov scpCharacter;
+    GameController scpManager;
     void Start() {
         timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Image>();
         txtScore = GameObject.FindGameObjectWithTag("txtCounter").GetComponent<Text>();
         txtStart = GameObject.Find("txtStart").GetComponent<Text>();
         goPanel = GameObject.Find("PanelCanvas");
         goPanel.SetActive(false);
-       /* scpCharacter = GameObject.Find("Player").GetComponent<CharacterMov>();
-        scpManager = GameObject.Find("GameManager").GetComponent<GameManager>();*/
+        //scpCharacter = GameObject.Find("Player").GetComponent<CharacterMov>();
+        scpManager = GameObject.Find("GameManager").GetComponent<GameController>();
         txtScore.text = "0x";
         StartCoroutine(Counter());
     }
@@ -32,19 +32,22 @@ public class HUD : MonoBehaviour {
         if (isStart)
         
         {
-            /*
-            txtScore.text = scpCharacter.GetPuntuacion().toString() + "x";
-            timer.fillAmount -= scpManager.Timer() / 100;
-        */
-            cont = Time.deltaTime / 10;
-            timer.fillAmount -= cont;
+            
+            txtScore.text = scpManager.getScore().ToString() + "x";
+            timer.fillAmount = (scpManager.getTime() / scpManager.mainTimer);
+                                  //20/20 = 1
+                                  //19/20 = .95
+                                                     
+        
+           /* cont = Time.deltaTime / 10;
+            timer.fillAmount -= cont;*/
 
-            /*if (scpManager.Life())
+            if (scpManager.GameOver())
             {
 
                 goPanel.SetActive(true);
-                goPanel.transform.GetChild(0).GetComponent<Text>().text = "Score: " + scpCharacter.GetPuntuacion().toString();
-            }*/
+                goPanel.transform.GetChild(0).GetComponent<Text>().text = "Score: " + scpManager.getScore().ToString();
+            }
         }
 
 
