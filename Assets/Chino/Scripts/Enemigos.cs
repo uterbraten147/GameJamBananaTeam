@@ -61,7 +61,6 @@ public class Enemigos : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, p.eulerAngles.y, 0);
         }
         
-
     }
 
     private void FixedUpdate()
@@ -70,7 +69,6 @@ public class Enemigos : MonoBehaviour {
         {
             mirig.MovePosition(transform.position + direccion * Time.deltaTime * speed);
         }
-        
     }
 
     public float Distancia(Vector3 A, Vector3 B)
@@ -119,12 +117,13 @@ public class Enemigos : MonoBehaviour {
     {
         direccion = player.position - transform.position;
         direccion.Normalize();
-
-        if(Distancia(transform.position, player.position)>distanciavista)
+        float dist = Distancia(transform.position, player.position);
+        if (dist>distanciavista)
         {
             esperar = true;
             StartCoroutine(Esperar());
         }
+        else if(dist<1.0f){ print("got cha"); alerta = false; StartCoroutine(notsearch()); }
     }
 
     public IEnumerator Esperar()
@@ -142,5 +141,15 @@ public class Enemigos : MonoBehaviour {
         }
         else { esperar = false; alerta = true; Persecucion(); }
         
+    }
+
+    public IEnumerator notsearch()
+    {
+        current = 0;
+        direccion = ruta[0].position - transform.position;
+        direccion.Normalize();
+        checar = false;
+        yield return new WaitForSeconds(2f);
+        checar = true;
     }
 }
