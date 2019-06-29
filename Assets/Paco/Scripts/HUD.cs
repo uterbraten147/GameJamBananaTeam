@@ -8,7 +8,7 @@ public class HUD : MonoBehaviour {
     // Use this for initialization
     GameObject goPanel;
     Image timer;
-    Text txtScore, txtStart;
+    Text txtScore, txtStart,txtTime;
     bool isStart = false;
     public float cont;
     CharacterMov scpCharacter;
@@ -17,11 +17,13 @@ public class HUD : MonoBehaviour {
         timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Image>();
         txtScore = GameObject.FindGameObjectWithTag("txtCounter").GetComponent<Text>();
         txtStart = GameObject.Find("txtStart").GetComponent<Text>();
+        txtTime = GameObject.Find("txtTime").GetComponent<Text>();
         goPanel = GameObject.Find("PanelCanvas");
         goPanel.SetActive(false);
         //scpCharacter = GameObject.Find("Player").GetComponent<CharacterMov>();
         scpManager = GameObject.Find("GameManager").GetComponent<GameController>();
         txtScore.text = "0x";
+        txtTime.text = "120";
         StartCoroutine(Counter());
     }
 	
@@ -32,7 +34,7 @@ public class HUD : MonoBehaviour {
         if (isStart)
         
         {
-            
+            txtTime.text = ((int)scpManager.getTime()).ToString();
             txtScore.text = scpManager.getScore().ToString() + "x";
             timer.fillAmount = (scpManager.getTime() / scpManager.mainTimer);
                                   //20/20 = 1
