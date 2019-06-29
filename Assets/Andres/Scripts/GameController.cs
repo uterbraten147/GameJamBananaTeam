@@ -27,8 +27,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if(time >= 0.0f)
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time);
+        if (time >= 0.0f)
         {
             time -= Time.deltaTime;
             //temporizador.text = "Tiempo: " +time.ToString();
