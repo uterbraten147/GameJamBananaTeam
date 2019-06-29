@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour {
 
     public static int score = 0;
 
+    public static bool ponercola = false;
+
     private float time=0;
     [SerializeField] private Text temporizador;
     [SerializeField] public int mainTimer;
@@ -30,6 +32,15 @@ public class GameController : MonoBehaviour {
         {
             //StopCoroutine("loseTime");
             //temporizador.text = "se acabo el tiempo";
+        }
+
+        if (Score.EntroalNido)
+        {
+            ponercola = true;
+        }
+        else
+        {
+            ponercola = false;
         }
 		
 	}
@@ -57,6 +68,8 @@ public class GameController : MonoBehaviour {
             return false;
         }
     }
+
+
 
 
     IEnumerator loseTime()
