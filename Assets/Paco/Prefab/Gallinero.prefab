@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33512485880989294}
   - component: {fileID: 23910034320184352}
   - component: {fileID: 65902731888542200}
+  - component: {fileID: 114252711556063386}
   m_Layer: 0
   m_Name: Gallinero
-  m_TagString: Untagged
+  m_TagString: Gallinero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +97,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 2.0000002, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &114252711556063386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1600505982242652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88b2277f6c00ff43b966c875107e724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EggPrefab: {fileID: 1323882298596596, guid: 3c66edd85d405814fb6764cc6c50cb3b, type: 2}
+  TengoHuevo: 0

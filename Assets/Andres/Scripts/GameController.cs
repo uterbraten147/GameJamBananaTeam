@@ -7,16 +7,19 @@ public class GameController : MonoBehaviour {
 
     public static int score = 0;
     public int FeatherCounter = 0;
-    public GameObject FeatherPrefab, SpawnerPoint;
+    public GameObject FeatherPrefab, SpawnerPoint, EggPrefab;
+    GameObject[] objGallinero;
     public static bool ponercola = false;
-
     private float time=0;
-   
+    public int QueGallinero;
     [SerializeField] public int mainTimer;
 
 	// Use this for initialization
 	void Start () {
+        objGallinero = GameObject.FindGameObjectsWithTag("Gallinero");
         time = mainTimer;
+        Debug.Log(objGallinero.Length);
+        EnDondePonerHuevo("0");
       /*  for(int i = 0;i < FeatherCounter; i++)
         {
             FeatherSpawner();
@@ -26,7 +29,8 @@ public class GameController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {      
+
         RenderSettings.skybox.SetFloat("_Rotation", Time.time);
         if (time >= 0.0f)
         {
@@ -50,6 +54,11 @@ public class GameController : MonoBehaviour {
 		
 	}
 
+    public void SetScore(int _score)
+    {
+        score += _score;
+    }
+
     public int getScore()
     {
         return score;
@@ -72,6 +81,22 @@ public class GameController : MonoBehaviour {
         {
             return false;
         }
+    }
+
+    public void EnDondePonerHuevo(string id)
+    {
+        
+        QueGallinero = Random.Range(0, objGallinero.Length);
+
+        if(objGallinero[QueGallinero].GetComponent<Gallinero>().TengoHuevo == false || objGallinero[QueGallinero].name != "Gallinero_"+id)
+        {
+            objGallinero[QueGallinero].GetComponent<Gallinero>().EggSpawner();
+        }
+        else
+        {
+            EnDondePonerHuevo(id);
+        }
+       
     }
 
     void FeatherSpawner()

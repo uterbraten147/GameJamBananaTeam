@@ -8,6 +8,7 @@ TagManager:
   - txtCounter
   - Timer
   - txtScore
+  - Gallinero
   layers:
   - Default
   - TransparentFX
