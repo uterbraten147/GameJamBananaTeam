@@ -34,7 +34,10 @@ public class HUD : MonoBehaviour {
         {
             
             txtScore.text = scpManager.getScore().ToString() + "x";
-            timer.fillAmount -= scpManager.getTime() / 100;
+            timer.fillAmount = (scpManager.getTime() / scpManager.mainTimer);
+                                  //20/20 = 1
+                                  //19/20 = .95
+                                                     
         
            /* cont = Time.deltaTime / 10;
             timer.fillAmount -= cont;*/

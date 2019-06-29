@@ -7,14 +7,14 @@ public class GameController : MonoBehaviour {
 
     public static int score = 0;
 
-    private int time=0;
+    private float time=0;
     [SerializeField] private Text temporizador;
-    [SerializeField] private int mainTimer;
+    [SerializeField] public int mainTimer;
 
 	// Use this for initialization
 	void Start () {
         time = mainTimer;
-        StartCoroutine("loseTime");
+        //StartCoroutine("loseTime");
 		
 	}
 	
@@ -23,13 +23,13 @@ public class GameController : MonoBehaviour {
 
         if(time >= 0.0f)
         {
-            //time -= Time.deltaTime;
-            temporizador.text = "Tiempo: " +time.ToString();
+            time -= Time.deltaTime;
+            //temporizador.text = "Tiempo: " +time.ToString();
         }
         else
         {
-            StopCoroutine("loseTime");
-            temporizador.text = "se acabo el tiempo";
+            //StopCoroutine("loseTime");
+            //temporizador.text = "se acabo el tiempo";
         }
 		
 	}
@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(1);
-            time--;
+            time-= Time.deltaTime;
         }
 
     }
