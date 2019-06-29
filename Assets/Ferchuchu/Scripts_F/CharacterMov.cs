@@ -16,14 +16,17 @@ public class CharacterMov : MonoBehaviour {
     private Vector3 moveVector;
     public Rigidbody rb;
     public int limites;
+    public ParticleSystem particle;
+    public GameObject parSpawn;
 
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         anim = this.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        particle.enableEmission = false;
+       
 
 
     }
@@ -49,6 +52,7 @@ public class CharacterMov : MonoBehaviour {
 
 
          rb.MovePosition(transform.position + transform.forward * Time.deltaTime* InputZ* velPlayer);
+         //Instantiate(particle, parSpawn.transform.position,parSpawn.transform.rotation);
 
         if (InputX != 0)
         {
@@ -71,6 +75,17 @@ public class CharacterMov : MonoBehaviour {
 
     }
 
+
+    public void Activar()
+    {
+        particle.enableEmission = true;
+    }
+
+    public void DesActivar()
+    {
+        particle.enableEmission = false;
+    }
+  
     public int GetPuntuacion()
     {
         return cont;
