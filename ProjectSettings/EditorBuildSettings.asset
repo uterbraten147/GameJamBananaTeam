@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScenePro.unity
     guid: b6d2a8b2e58e0a94e891b9c7fb406dcc
   - enabled: 1
+    path: Assets/Andres/escenas/LoadScreen.unity
+    guid: c25bf43db2cad164e87c03620c5a9d7a
+  - enabled: 1
     path: Assets/Main.unity
     guid: 4303bf528b189f048aa948fd96c6607a
   m_configObjects: {}

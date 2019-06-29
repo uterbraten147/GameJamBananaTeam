@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
     public static bool ponercola = false;
 
     private float time=0;
-    [SerializeField] private Text temporizador;
+   
     [SerializeField] public int mainTimer;
 
 	// Use this for initialization

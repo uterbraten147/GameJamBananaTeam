@@ -144,7 +144,7 @@ MonoBehaviour:
   FeatherPrefab: {fileID: 100000, guid: 1bbb1753f61a8b3409d0388b7b6598d5, type: 3}
   SpawnerPoint: {fileID: 515298388}
   temporizador: {fileID: 0}
-  mainTimer: 20
+  mainTimer: 120
 --- !u!4 &88841058
 Transform:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4522051002903066, guid: 5d6187aa4395fcc43abf38f0a7202ac7, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6187aa4395fcc43abf38f0a7202ac7, type: 2}
@@ -370,7 +370,7 @@ Prefab:
     - target: {fileID: 224664168195895002, guid: dc8d61144e158524683f2b211fee58ff,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224664168195895002, guid: dc8d61144e158524683f2b211fee58ff,
         type: 2}
