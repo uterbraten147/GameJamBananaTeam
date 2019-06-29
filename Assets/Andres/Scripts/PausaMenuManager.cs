@@ -12,9 +12,10 @@ public class PausaMenuManager : MonoBehaviour {
 	void Awake ()
     {
         PausaMenuPanel.SetActive(false);
-		
+        Time.timeScale = 1;
 
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,6 +37,7 @@ public class PausaMenuManager : MonoBehaviour {
     public void reiniciar()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
     }
 
     public void reanudar()
