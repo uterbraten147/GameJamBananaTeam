@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public static int score = 0;
-
+    public int FeatherCounter = 0;
+    public GameObject FeatherPrefab, SpawnerPoint;
     public static bool ponercola = false;
 
     private float time=0;
@@ -16,6 +17,10 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         time = mainTimer;
+      /*  for(int i = 0;i < FeatherCounter; i++)
+        {
+            FeatherSpawner();
+        }*/
         //StartCoroutine("loseTime");
 		
 	}
@@ -69,6 +74,12 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    void FeatherSpawner()
+    {
+        GameObject aux;
+        aux = Instantiate(FeatherPrefab,new Vector3(SpawnerPoint.transform.position.x, SpawnerPoint.transform.position.y, SpawnerPoint.transform.position.z), Quaternion.identity);
+        aux.transform.rotation = Quaternion.Euler(Random.Range(170,280), 0, Random.Range(0, 10));
+    }
 
 
 

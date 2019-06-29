@@ -19,7 +19,7 @@ public class HUD : MonoBehaviour {
         txtStart = GameObject.Find("txtStart").GetComponent<Text>();
         goPanel = GameObject.Find("PanelCanvas");
         goPanel.SetActive(false);
-       scpCharacter = GameObject.Find("Player").GetComponent<CharacterMov>();
+        //scpCharacter = GameObject.Find("Player").GetComponent<CharacterMov>();
         scpManager = GameObject.Find("GameManager").GetComponent<GameController>();
         txtScore.text = "0x";
         StartCoroutine(Counter());
