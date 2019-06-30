@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
         objGallinero = GameObject.FindGameObjectsWithTag("Gallinero");
         time = mainTimer;
-        Debug.Log(objGallinero.Length);
+        //Debug.Log(objGallinero.Length);
         EnDondePonerHuevo("0");
       /*  for(int i = 0;i < FeatherCounter; i++)
         {

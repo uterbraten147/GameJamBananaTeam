@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class HUD : MonoBehaviour {
 
     // Use this for initialization
     GameObject goPanel;
+    public static bool muertisimo = false;
     Image timer;
     Text txtScore, txtStart,txtTime;
     bool isStart = false;
+    public EventSystem eventsys;
     public float cont;
     CharacterMov scpCharacter;
     GameController scpManager;
+    public GameObject BTNreiniciar;
     void Start() {
         timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Image>();
         txtScore = GameObject.FindGameObjectWithTag("txtCounter").GetComponent<Text>();
@@ -46,9 +50,11 @@ public class HUD : MonoBehaviour {
 
             if (scpManager.GameOver())
             {
-
+                muertisimo = true;
+                Time.timeScale = 0;
                 goPanel.SetActive(true);
                 goPanel.transform.GetChild(0).GetComponent<Text>().text = "Score: " + scpManager.getScore().ToString();
+                eventsys.SetSelectedGameObject(BTNreiniciar, null);
             }
         }
 

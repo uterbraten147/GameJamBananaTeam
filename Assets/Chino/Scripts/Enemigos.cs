@@ -7,6 +7,10 @@ public class Enemigos : MonoBehaviour {
     Vector3 posiIni, direccion;
     public Transform rayorigin, player;
     Rigidbody mirig;
+    GameObject canvasalerta;
+    GameController gamemanager;
+    Light spotlight;
+    Color white, red;
 
     public float speed=5.0f, distanciavista=14.0f;
     public Transform[] ruta;
@@ -15,6 +19,11 @@ public class Enemigos : MonoBehaviour {
 
 	void Start ()
     {
+        white = Color.white;
+        red = Color.red;
+        canvasalerta = transform.GetChild(3).gameObject;
+        canvasalerta.SetActive(false);
+        spotlight = transform.GetChild(1).GetComponent<Light>();
         posiIni = transform.position;
         mirig = GetComponent<Rigidbody>();
         //Saco vector de el enemigo al objetivo;
@@ -23,7 +32,9 @@ public class Enemigos : MonoBehaviour {
         direccion.Normalize();
         sizeruta=ruta.Length;
         //print("tamaño ruta es " + sizeruta);
-	}
+        gamemanager = GameObject.Find("GameManager").GetComponent<GameController>();
+
+    }
 	
 	void Update ()
     {
@@ -98,6 +109,9 @@ public class Enemigos : MonoBehaviour {
                         Debug.DrawLine(rayorigin.position, player.position, Color.red, 1f);
                         print("te vi putito");
                         alerta = true;
+                        //DESCUBIERTO
+                        canvasalerta.SetActive(true);
+                        spotlight.color = red;
                     }
                 }
             }
@@ -123,7 +137,14 @@ public class Enemigos : MonoBehaviour {
             esperar = true;
             StartCoroutine(Esperar());
         }
-        else if(dist<1.0f){ print("got cha"); alerta = false; StartCoroutine(notsearch()); }
+        else if(dist<1.0f){ print("got cha");
+            gamemanager.SetScore(-10);
+            StartCoroutine(notPlayerMov());
+            alerta = false;
+            StartCoroutine(notsearch());
+            canvasalerta.SetActive(false);
+            spotlight.color = white;
+        }
     }
 
     public IEnumerator Esperar()
@@ -138,6 +159,9 @@ public class Enemigos : MonoBehaviour {
             direccion = ruta[0].position - transform.position;
             direccion.Normalize();
             esperar = false;
+            //Perdido
+            canvasalerta.SetActive(false);
+            spotlight.color = white;
         }
         else { esperar = false; alerta = true; Persecucion(); }
         
@@ -151,5 +175,13 @@ public class Enemigos : MonoBehaviour {
         checar = false;
         yield return new WaitForSeconds(2f);
         checar = true;
+    }
+
+    public IEnumerator notPlayerMov()
+    {
+        player.GetComponent<CharacterMov>().anim.SetTrigger("Hit");
+        player.GetComponent<CharacterMov>().enabled = false;        
+        yield return new WaitForSeconds(1.5f);
+        player.GetComponent<CharacterMov>().enabled = true;
     }
 }

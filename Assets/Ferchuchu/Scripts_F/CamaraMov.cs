@@ -43,7 +43,7 @@ public class CamaraMov : MonoBehaviour {
         mouseY = Input.GetAxis("Mouse Y");
         finalInputX = inputX + mouseX;
         finalInputZ = inputZ + mouseY;
-        Debug.Log(finalInputZ);
+        //Debug.Log(finalInputZ);
 
         rotY += finalInputX * inputSensivity * Time.deltaTime;
         rotX += finalInputZ * inputSensivity * Time.deltaTime;

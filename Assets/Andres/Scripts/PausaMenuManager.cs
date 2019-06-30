@@ -2,26 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class PausaMenuManager : MonoBehaviour {
 
     bool menuPausa = false;
     public GameObject PausaMenuPanel;
-
-	// Use this for initialization
-	void Awake ()
+    public GameObject eventSys;
+    public GameObject BTNPause;
+    GameObject player;
+    // Use this for initialization
+    void Awake ()
     {
         PausaMenuPanel.SetActive(false);
         Time.timeScale = 1;
+        //player = GameObject.Find("Player").GetComponent<CharacterMov>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<CharacterMov>().enabled = true;
 
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if ((Input.GetKeyDown(KeyCode.Escape)||Input.GetButton("Start")) && !HUD.muertisimo ){
             if (!menuPausa)
             {
+                player.GetComponent<CharacterMov>().enabled = false;
+
+                eventSys.GetComponent<EventSystem>().SetSelectedGameObject(BTNPause, null);
                 PausaMenuPanel.SetActive(true);
                 menuPausa = true;
                 Time.timeScale = 0;              
@@ -43,6 +52,7 @@ public class PausaMenuManager : MonoBehaviour {
     public void reanudar()
     {
         Time.timeScale = 1;
+        player.GetComponent<CharacterMov>().enabled = true;
         PausaMenuPanel.SetActive(false);
         menuPausa = false;   
     }
