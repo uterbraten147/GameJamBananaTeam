@@ -14,7 +14,15 @@ public class loadScene : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(showcutscene());
+        if(SceneManager.GetActiveScene().name == "LoadScreenMainMenu")
+        {
+            StartCoroutine(cargarEscena());
+        }
+        else
+        {
+            StartCoroutine(showcutscene());
+        }
+        
     }
 
     IEnumerator showcutscene()
