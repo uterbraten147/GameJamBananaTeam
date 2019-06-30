@@ -48,7 +48,8 @@ public class CamaraMov : MonoBehaviour {
         rotY += finalInputX * inputSensivity * Time.deltaTime;
         rotX += finalInputZ * inputSensivity * Time.deltaTime;
 
-        rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+        rotX = Mathf.Clamp(rotX, -clampAngle, 40);
+        //rotY = Mathf.Clamp(rotY, -clampAngle, clampAngle);
 
         Quaternion localRotation = Quaternion.Euler(rotX*-1, rotY, 0.0f);
         transform.rotation = localRotation;
