@@ -21,7 +21,6 @@ public class loadScene : MonoBehaviour {
     IEnumerator cargarEscena()
     {
         AsyncOperation cargarMundo = SceneManager.LoadSceneAsync(levelLoad);
-
         while (cargarMundo.progress < 1)
         {
             BarradeCarga.fillAmount = cargarMundo.progress;

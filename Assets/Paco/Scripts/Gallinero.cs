@@ -18,7 +18,7 @@ public class Gallinero : MonoBehaviour {
 
     public void EggSpawner()
     {
-        int QueGallinero;
+
         //QueGallinero = Random.Range(0, objGallinero.Length);
         GameObject aux;
         aux = Instantiate(EggPrefab, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.identity);
