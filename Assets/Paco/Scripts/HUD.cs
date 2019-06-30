@@ -13,7 +13,6 @@ public class HUD : MonoBehaviour {
     Text txtScore, txtStart,txtTime;
     bool isStart = false;
     public EventSystem eventsys;
-    public float cont;
     CharacterMov scpCharacter;
     GameController scpManager;
     public GameObject BTNreiniciar;

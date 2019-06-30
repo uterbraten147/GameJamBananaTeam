@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterMov : MonoBehaviour {
 
@@ -57,14 +58,9 @@ public class CharacterMov : MonoBehaviour {
         if (InputX != 0)
         {
             transform.Rotate(Vector3.up, InputX * smoothRotation);
-           
-
 
         }
-        else
-        {
-           
-        }
+ 
 
 
         Speed = new Vector2(InputX, InputZ).sqrMagnitude;
@@ -83,7 +79,10 @@ public class CharacterMov : MonoBehaviour {
 
     public void DesActivar()
     {
-        particle.enableEmission = false;
+       
+            particle.enableEmission = false;
+        
+        
     }
   
     public int GetPuntuacion()
