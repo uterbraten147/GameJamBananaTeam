@@ -14,9 +14,14 @@ public class loadScene : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(cargarEscena());
+        StartCoroutine(showcutscene());
     }
 
+    IEnumerator showcutscene()
+    {
+        yield return new WaitForSeconds(6.5f);
+        StartCoroutine(cargarEscena());
+    }
 
     IEnumerator cargarEscena()
     {
@@ -27,8 +32,5 @@ public class loadScene : MonoBehaviour {
             yield return new WaitForEndOfFrame();
 
         }
-
-
-
     }
 }

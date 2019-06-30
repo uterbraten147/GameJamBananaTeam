@@ -75,4 +75,6 @@ public class HUD : MonoBehaviour {
         isStart = true;
 
     }
+
+
 }

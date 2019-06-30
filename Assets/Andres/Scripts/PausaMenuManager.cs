@@ -40,8 +40,10 @@ public class PausaMenuManager : MonoBehaviour {
 
     public void returnMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
     }
+
+
 
     public void reiniciar()
     {
