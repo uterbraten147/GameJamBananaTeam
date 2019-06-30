@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
         time = mainTimer;
         //Debug.Log(objGallinero.Length);
         EnDondePonerHuevo("0");
+        score = 0;
       /*  for(int i = 0;i < FeatherCounter; i++)
         {
             FeatherSpawner();
