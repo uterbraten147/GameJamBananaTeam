@@ -20,6 +20,7 @@ public class CamaraMov : MonoBehaviour {
     public float mouseY;
     public float finalInputX;
     public float finalInputZ;
+    public float inputX, inputZ;
     private float rotY = 0.0f;
     private float rotX = 0.0f;
 
@@ -37,8 +38,8 @@ public class CamaraMov : MonoBehaviour {
     }
 	
 	void Update () {
-        float inputX = Input.GetAxis("RightStickHorizontal");
-        float inputZ = Input.GetAxis("RightStickVertical");
+         inputX = Input.GetAxis("RightStickHorizontal");
+         inputZ = Input.GetAxis("RightStickVertical");
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
         finalInputX = inputX + mouseX;

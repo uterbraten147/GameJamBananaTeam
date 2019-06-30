@@ -19,6 +19,7 @@ public class CharacterMov : MonoBehaviour {
     public int limites;
     public ParticleSystem particle;
     public GameObject parSpawn;
+    CamaraMov scpCam;
 
 
     // Use this for initialization
@@ -27,7 +28,7 @@ public class CharacterMov : MonoBehaviour {
         anim = this.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         particle.enableEmission = false;
-       
+        scpCam = GameObject.Find("SuperCamora").GetComponent<CamaraMov>();
 
 
     }
